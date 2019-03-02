@@ -54,8 +54,6 @@ class LoginViewController: UIViewController {
         }
 
     }
-    
-    
     // END-UOC-6
     
     @IBAction func unwindToLogin(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
