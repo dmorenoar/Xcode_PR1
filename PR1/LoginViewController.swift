@@ -37,8 +37,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         
         let hour = Calendar.current.component(.hour, from: Date())
-        print(hour)
-        
+
         if hour >= 6 && hour <= 11{
             welcomeLabel.text = "Good morning"
             self.view.backgroundColor = UIColor.orange.lighter()

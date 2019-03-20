@@ -53,12 +53,18 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    /*Método heredado de UITextFieldDelegate que nos permite gestionar que el usuario únicamente pueda introducir dígitos numéricos en los inputFields */
+    /*Método heredado de UITextFieldDelegate que nos permite gestionar que el usuario únicamente pueda introducir 1 único dígito numérico en los inputFields mediante el NumberPad*/
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return Int(string) != nil
+
+        let maxLength = 1
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        
+        return newString.length <= maxLength
+        
     }
-    
-    
+
     // END-UOC-4
     
     @IBAction func backButtonTapped(_ sender: UIButton) {

@@ -29,7 +29,8 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func changeInterestRate(_ sender: UIStepper) {
-        interestRateLabel.text = "Interest rate: \(Double(sender.value)) %"
+        let interest = String(format: "%.2f", Double(sender.value))
+        interestRateLabel.text = "Interest rate:\(interest)%"
         updateFinalAmount()
     }
     
@@ -40,7 +41,8 @@ class CalculatorViewController: UIViewController {
     
     /*Función que actualiza el label Final Amount con el cálculo de initial amount, interest y years usando la función definida en Services calculateFinalAmount que retorna un Double. Se realiza un round para mostrar únicamente 2 decimales.*/
     func updateFinalAmount() {
-        finalAmountLabel.text = "Final amount: \((Services.calculateFinalAmount(ForAmount: initialAmountSlider.value, WithInterest: interestRateStepper.value, AndYears: yearsStepper.value)/100).rounded()/100) €"
+        let finalAmount = String(format: "%.2f",Services.calculateFinalAmount(ForAmount: initialAmountSlider.value, WithInterest: (interestRateStepper.value/100), AndYears: yearsStepper.value))
+        finalAmountLabel.text = "Final amount: \(finalAmount) €"
     }
 
     // END-UOC-7.2
@@ -50,20 +52,21 @@ class CalculatorViewController: UIViewController {
     /*Añadimos la función viewWillApper para que cuando pulsemos una opción del tabBar y volvamos los valores se restablezcan*/
     override func viewWillAppear(_ animated: Bool) {
         resetValues()
+        updateFinalAmount()
     }
     
     /*Al cargar la vista asignamos los valores por defecto*/
     override func viewDidLoad() {
-       resetValues()
+        resetValues()
     }
     
     /*Función que restaura los valores del initial amount, interest y years*/
     func resetValues(){
         initialAmountLabel.text = "Initial amount: \(Int(initialAmountSlider.minimumValue)) €"
         initialAmountSlider.value = 100
-        interestRateLabel.text = "Interest rate: \(Double(interestRateStepper.minimumValue)) %"
+        let interest = String(format: "%.2f", Double(interestRateStepper.minimumValue))
+        interestRateLabel.text = "Interest rate:\(interest)%"
         yearsLabel.text = "Years: \(Int(yearsStepper.minimumValue))"
-        
     }
     
     // END-UOC-7.3
